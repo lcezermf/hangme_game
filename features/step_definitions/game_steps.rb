@@ -19,3 +19,7 @@ end
 Então(/^o jogo termina com a seguinte mensagem na tela:$/) do |text|
   assert_passing_with(text)
 end
+
+Quando(/^termino o jogo$/) do
+  type('fim')
+end

@@ -20,6 +20,7 @@ Funcionalidade: Começar jogo
 
     Dado que comecei um jogo
     Quando escolho que a palavra deverá ter '5' letras
+    E termino o jogo
     Então o jogo termina com a seguinte mensagem na tela:
       """
       _ _ _ _ _

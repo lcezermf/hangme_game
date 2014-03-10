@@ -2,8 +2,10 @@ require 'spec_helper'
 require 'game'
 
 describe Game do
-  let(:output) { double 'output' } # Definindo um colaborador p/ Game
-  subject(:game) { Game.new output }
+  # Definindo colaboradores p/ o Game
+  let(:output) { double 'output' }
+  let(:input) { double 'input' }
+  subject(:game) { Game.new output, input }
 
   context '#start' do
     it 'show welcome message' do
@@ -25,6 +27,7 @@ describe Game do
       it 'ask to player, how many letters for your word' do
         question = 'Qual o tamanho da palavra a ser sorteada?'
         expect(output).to receive(:puts).with(question)
+        expect(input).to receive(:gets)
         game.next_step
       end
     end
