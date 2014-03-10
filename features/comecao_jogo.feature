@@ -8,7 +8,7 @@ Funcionalidade: Começar jogo
     Ao começar o jogo, é mostrada uma mensagem inicial.
 
     Quando começo um novo jogo
-    Então vejo a mensagem:
+    Então vejo na tela:
       """
-      Bem vindo ao jogo da forca!
+      Bem vindo ao jogo da forca
       """

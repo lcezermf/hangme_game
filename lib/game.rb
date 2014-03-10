@@ -1,7 +1,11 @@
 class Game
 
+  def initialize(output = STDOUT)
+    @output = output
+  end
+
   def start
-    puts 'Bem vindo ao jogo da forca'
+    @output.puts 'Bem vindo ao jogo da forca'
   end
 
 end
