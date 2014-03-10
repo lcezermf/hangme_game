@@ -1,15 +1,9 @@
 # encoding: utf-8
 
 Quando(/^começo um novo jogo$/) do
-  # game = Game.new
-  # game.start
-  steps %{
-    * I run `forca` interactively
-  }
+  run_interactive("forca")
 end
 
 Então(/^vejo na tela:$/) do |string|
-  steps %{
-    * the stdout should contain "#{string}"
-  }
+  assert_partial_output(string, all_stdout)
 end
