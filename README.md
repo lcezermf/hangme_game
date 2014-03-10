@@ -1,0 +1,1 @@
+Jogo da Forca, utilizando Ruby. Criado para estudar RSpec e Cucumber
