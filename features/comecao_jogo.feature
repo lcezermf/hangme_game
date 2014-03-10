@@ -8,7 +8,19 @@ Funcionalidade: Começar jogo
     Ao começar o jogo, é mostrada uma mensagem inicial.
 
     Quando começo um novo jogo
-    Então vejo na tela:
+    Então o jogo termina com a seguinte mensagem na tela:
       """
       Bem vindo ao jogo da forca
+      """
+
+  @wip
+  Cenário: Sortear uma palavra
+    Após começar o jogo, o jogador pode escolher o tamanho da palavra.
+    Ao escolher o tamanho, o jogo mostra um "_" para cada letra da palavra.
+
+    Dado que comecei um jogo
+    Quando escolho que a palavra deverá ter '5' letras
+    Então o jogo termina com a seguinte mensagem na tela:
+      """
+      _ _ _ _ _
       """
