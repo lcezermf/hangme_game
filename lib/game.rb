@@ -1,13 +1,14 @@
+require_relative 'command_line_ui'
+
 class Game
 
-  def initialize(output = STDOUT, input = STDIN)
-    @output = output
-    @input = input
+  def initialize(ui = CommandLineUi.new)
+    @ui = ui
     @ended = false
   end
 
   def start
-    @output.puts 'Bem vindo ao jogo da forca'
+    @ui.write 'Bem vindo ao jogo da forca'
   end
 
   def ended?
@@ -15,8 +16,9 @@ class Game
   end
 
   def next_step
-    @output.puts 'Qual o tamanho da palavra a ser sorteada?'
-    @input.gets
+    @ui.write 'Qual o tamanho da palavra a ser sorteada?'
+    input = @ui.read.strip
+    @ended = true if input.eql? 'fim'
   end
 
 end
