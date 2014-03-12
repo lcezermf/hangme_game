@@ -36,10 +36,27 @@ describe Game do
     it do
       input_text = 'fim'
       allow(ui).to receive(:read).and_return(input_text)
+      allow(game).to receive(:finish)
 
       game.next_step
 
       expect(game).to be_ended
     end
   end
+
+  context 'when player asks to raffle a word' do
+
+    it 'sort a word with the given size' do
+      word_size = '6'
+      allow(ui).to receive(:read).and_return(word_size)
+
+      game.next_step
+
+      expect(game.raffled_word).to have(word_size).letters
+    end
+
+    it "put a '_' for each letter in the word"
+
+  end
+
 end
