@@ -26,7 +26,9 @@ describe Game do
       it 'ask to player, how many letters for your word' do
         question = 'Qual o tamanho da palavra a ser sorteada?'
         expect(ui).to receive(:write).with(question)
-        expect(ui).to receive(:read)
+
+        expect(ui).to receive(:read).and_return('6')
+
         game.next_step
       end
     end
@@ -36,7 +38,6 @@ describe Game do
     it do
       input_text = 'fim'
       allow(ui).to receive(:read).and_return(input_text)
-      allow(game).to receive(:finish)
 
       game.next_step
 
@@ -47,15 +48,21 @@ describe Game do
   context 'when player asks to raffle a word' do
 
     it 'sort a word with the given size' do
-      word_size = '6'
-      allow(ui).to receive(:read).and_return(word_size)
+      word_length = '6'
+      allow(ui).to receive(:read).and_return(word_length)
 
       game.next_step
 
-      expect(game.raffled_word).to have(word_size).letters
+      expect(game.raffled_word).to have(word_length).letters
     end
 
-    it "put a '_' for each letter in the word"
+    it "put a '_' for each letter in the word" do
+      word_length = '6'
+      allow(ui).to receive(:read).and_return(word_length)
+      expect(ui).to receive(:write).with('_ _ _ _ _ _')
+
+      game.next_step
+    end
 
   end
 

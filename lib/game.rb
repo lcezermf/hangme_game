@@ -22,9 +22,23 @@ class Game
     if input.eql? 'fim'
       @ended = true
     else
-      words = %w(metallica slayer kreator anthrax megadeth slipknot)
-      @raffled_word = words.detect { |word| word.size.to_i.eql? input.to_i }
+      raffle_word input.to_i
+      print_feedback_letters
     end
+  end
+
+  private
+
+  def print_feedback_letters
+    letters = ''
+    @raffled_word.length.times { letters << '_ ' }
+    letters.rstrip!
+    @ui.write(letters)
+  end
+
+  def raffle_word(input)
+    words = %w(metallica slayer kreator anthrax megadeth slipknot)
+    @raffled_word = words.detect { |word| word.size.to_i.eql? input }
   end
 
 end
