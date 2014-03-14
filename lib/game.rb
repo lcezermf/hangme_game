@@ -17,17 +17,26 @@ class Game
   end
 
   def next_step
-    @ui.write 'Qual o tamanho da palavra a ser sorteada?'
+    @ui.write "Qual o tamanho da palavra a ser sorteada?"
     input = @ui.read.strip
+
     if input.eql? 'fim'
       @ended = true
     else
-      raffle_word input.to_i
-      print_feedback_letters
+      if raffle_word(input.to_i)
+        print_feedback_letters
+      else
+        error_message
+      end
     end
   end
 
   private
+
+  def error_message
+    message = "Não temos palavras com o tamanho desejado. Qual o tamanho da palavra a ser sorteada?"
+    @ui.write message
+  end
 
   def print_feedback_letters
     letters = ''

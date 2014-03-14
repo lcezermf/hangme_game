@@ -46,7 +46,6 @@ describe Game do
   end
 
   context 'when player asks to raffle a word' do
-
     it 'sort a word with the given size' do
       word_length = '6'
       allow(ui).to receive(:read).and_return(word_length)
@@ -63,7 +62,20 @@ describe Game do
 
       game.next_step
     end
+  end
 
+  context 'when user try to raffled a big world' do
+    it 'tell him it is not possible to raffle that word' do
+      word_length = '22'
+      allow(ui).to receive(:read).and_return(word_length)
+
+      error_message = "Não temos palavras com o tamanho desejado. Qual o tamanho da palavra a ser sorteada?"
+      expect(ui).to receive(:write).with(error_message)
+
+      game.next_step
+    end
   end
 
 end
+
+
