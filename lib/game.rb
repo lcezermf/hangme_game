@@ -1,10 +1,12 @@
 require_relative 'command_line_ui'
+require_relative 'word_raffler'
 
 class Game
   attr_accessor :raffled_word
 
-  def initialize(ui = CommandLineUi.new)
+  def initialize(ui = CommandLineUi.new, word_raffler = WordRaffler.new)
     @ui = ui
+    @word_raffler = word_raffler
     @ended = false
   end
 
@@ -23,7 +25,7 @@ class Game
     if input.eql? 'fim'
       @ended = true
     else
-      if raffle_word(input.to_i)
+      if @raffled_word = @word_raffler.raffle(input.to_i)
         print_feedback_letters
       else
         error_message

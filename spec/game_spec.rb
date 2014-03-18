@@ -3,8 +3,9 @@ require 'game'
 
 describe Game do
   # Definindo colaboradores p/ o Game
+  let(:word_raffler) { double('word raffler').as_null_object }
   let(:ui) { double('ui').as_null_object }
-  subject(:game) { Game.new ui }
+  subject(:game) { Game.new ui, word_raffler }
 
   context '#start' do
     it 'show welcome message' do
@@ -50,24 +51,24 @@ describe Game do
       word_length = '6'
       allow(ui).to receive(:read).and_return(word_length)
 
-      game.next_step
+      expect(word_raffler).to receive(:raffle).with(word_length.to_i)
 
-      expect(game.raffled_word).to have(word_length).letters
+      game.next_step
     end
 
     it "put a '_' for each letter in the word" do
       word_length = '6'
       allow(ui).to receive(:read).and_return(word_length)
-      expect(ui).to receive(:write).with('_ _ _ _ _ _')
+      allow(word_raffler).to receive(:raffle).and_return('slayer')
 
+      expect(ui).to receive(:write).with('_ _ _ _ _ _')
       game.next_step
     end
-  end
 
-  context 'when user try to raffled a big world' do
     it 'tell him it is not possible to raffle that word' do
       word_length = '22'
       allow(ui).to receive(:read).and_return(word_length)
+      allow(word_raffler).to receive(:raffle).and_return(nil)
 
       error_message = "Não temos palavras com o tamanho desejado. Qual o tamanho da palavra a ser sorteada?"
       expect(ui).to receive(:write).with(error_message)
@@ -75,7 +76,4 @@ describe Game do
       game.next_step
     end
   end
-
 end
-
-
