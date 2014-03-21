@@ -26,7 +26,6 @@ Funcionalidade: Começar jogo
       _ _ _ _ _ _
       """
 
-  @wip
   Cenário: Sortear palavra sem sucesso
     Se o jogador pedir para o jogo sortear uma palavra com tamanho indisponível,
     o jogador deverá ser avisado e o jogo deve pedir para o jogador sortear outra palavra.
