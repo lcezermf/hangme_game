@@ -4,7 +4,7 @@ module GameHelpers
     @raffleable_words = words
   end
 
-  def start_new_game()
+  def start_new_game
     set_raffleable_words %w(metallica slayer kreator anthrax megadeth slipknot) unless @raffleable_words
     run_interactive 'forca'
   end

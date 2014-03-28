@@ -18,6 +18,21 @@ describe Game do
       game.raffle(6)
     end
 
+    it 'change stage from :inital to :word_raffled' do
+      allow(word_raffler).to receive(:raffle).and_return('slayer')
+
+      expect {
+        game.raffle(6)
+      }.to change { game.state }.from(:initial).to(:word_raffled)
+    end
+
+    it 'do not change de :initial when can not be raffled' do
+      allow(word_raffler).to receive(:raffle).and_return(nil)
+
+      game.raffle(6)
+      expect(game.state).to eql(:initial)
+    end
+
     it 'save raffled word' do
       raffled_word = 'megadeth'
       allow(word_raffler).to receive(:raffle).and_return(raffled_word)
@@ -31,6 +46,12 @@ describe Game do
     it do
       game.finish
       expect(game).to be_ended
+    end
+  end
+
+  context 'state machine' do
+    context 'when start' do
+      it { expect(game.state).to eql(:initial) }
     end
   end
 
