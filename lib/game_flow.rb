@@ -26,6 +26,7 @@ class GameFlow
   private
 
   def ask_to_guess_a_word
+    @ui.write 'Qual a letra ?'
     letter = @ui.read.strip
 
     if @game.guess_letter letter

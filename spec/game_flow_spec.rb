@@ -27,17 +27,31 @@ describe GameFlow do
       end
     end
 
-    context 'when the player guess a letter with success' do
-      it 'print success message' do
-        game.stub(:state) { :word_raffled }
-        game.stub(:guess_letter) { true }
+    context 'when the game is in the :word_raffled state' do
+      before { game.stub(:state) { :word_raffled } }
+      it 'ask to player to guess a letter' do
+        # allow(game).to receive(:state).and_return(:word_raffled)
 
-        message = 'Você adivinhou uma letra.'
+
+        message = 'Qual a letra ?'
         expect(ui).to receive(:write).with(message)
 
         game_flow.next_step
       end
+
+      context 'and the player guess a letter with success' do
+        it 'print success message' do
+          game.stub(:guess_letter) { true }
+
+          message = 'Você adivinhou uma letra.'
+          expect(ui).to receive(:write).with(message)
+
+          game_flow.next_step
+        end
+      end
     end
+
+
   end
 
   context 'when player asks to raffle a word' do
