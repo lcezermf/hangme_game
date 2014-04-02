@@ -12,6 +12,51 @@ describe Game do
     end
   end
 
+  context '#guess_letter' do
+    it { expect(game.guessed_letters).to eq([]) }
+
+    it 'save the guessed_letters' do
+      game.raffled_word = 'slayer'
+
+      expect {
+        game.guess_letter('a')
+      }.to change { game.guessed_letters }.from([]).to(['a'])
+    end
+
+    it 'does not save guessed_letters more than once' do
+      game.raffled_word = 'slayer'
+      game.guess_letter('a')
+
+      expect {
+        game.guess_letter('a')
+      }.not_to change { game.guessed_letters }.from(['a'])
+    end
+
+    it 'return the guessd_letter' do
+      game.raffled_word = 'slayer'
+      game.guess_letter('a')
+
+      expect(game.guessed_letters).to eq ['a']
+    end
+
+    it 'return true if the raffled_word contains the guessd_letter word' do
+      game.raffled_word = 'slayer'
+      expect(game.guess_letter('a')).to be_true
+    end
+
+    it 'return false if the raffled_word does not contains the guessd_letter word' do
+      game.raffled_word = 'korn'
+      expect(game.guess_letter('a')).to be_false
+    end
+
+    it 'return false if the letter is blank' do
+      game.raffled_word = 'korn'
+
+      expect(game.guess_letter("")).to be_false
+      expect(game.guess_letter(" ")).to be_false
+    end
+  end
+
   context '#raffle' do
     it 'ruffled a word with the size' do
       expect(word_raffler).to receive(:raffle).with(6)
