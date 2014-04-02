@@ -31,6 +31,7 @@ class GameFlow
 
     if @game.guess_letter letter
       @ui.write('Você adivinhou uma letra.')
+      @ui.write(guessed_letters)
     end
   end
 
@@ -42,18 +43,27 @@ class GameFlow
       @game.finish
     else
       if @game.raffle(input.to_i)
-        print_feedback_letters
+        @ui.write guessed_letters
       else
         error_message
       end
     end
   end
 
-  def print_feedback_letters
+  private
+
+  def guessed_letters
     letters = ''
-    @game.raffled_word.length.times { letters << '_ ' }
-    letters.rstrip!
-    @ui.write(letters)
+
+    @game.raffled_word.each_char do |letter|
+      if @game.guessed_letters.include?(letter)
+        letters << letter + ' '
+      else
+        letters << '_ '
+      end
+    end
+
+    letters.strip!
   end
 
   def error_message
