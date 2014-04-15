@@ -100,4 +100,18 @@ describe Game do
     end
   end
 
+  context '#missed_parts' do
+    it 'empty array when there is no missed part' do
+      expect(game.missed_parts).to eq([])
+    end
+
+    it 'return missed part for each fail guess' do
+      game.raffled_word = 'slayer'
+
+      3.times { game.guess_letter('j') }
+
+      expect(game.missed_parts).to eq(['cabeça', 'corpo', 'braço esquerdo'])
+    end
+  end
+
 end

@@ -3,12 +3,13 @@ require_relative 'word_raffler'
 
 class Game
   attr_accessor :raffled_word, :state
-  attr_reader :guessed_letters
+  attr_reader :guessed_letters, :missed_parts
 
   def initialize(word_raffler = WordRaffler.new)
     @word_raffler = word_raffler
     @state = :initial
     @guessed_letters = []
+    @missed_parts = []
   end
 
   def raffle(word_size)
