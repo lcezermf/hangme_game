@@ -7,7 +7,7 @@ describe GameFlow do
   subject(:game_flow) { GameFlow.new game, ui }
 
   context '#start' do
-    it 'show inital message' do
+    it 'show initial message' do
       message = 'Bem vindo ao jogo da forca'
       expect(ui).to receive(:write).with(message)
 
@@ -28,14 +28,9 @@ describe GameFlow do
     end
 
     context 'when the game is in the :word_raffled state' do
-      before do
-        game.stub(:state) { :word_raffled }
-        game.stub(:guess_letter) { true }
-      end
+      before { game.stub(:state) { :word_raffled } }
+
       it 'ask to player to guess a letter' do
-        # allow(game).to receive(:state).and_return(:word_raffled)
-
-
         message = 'Qual a letra ?'
         expect(ui).to receive(:write).with(message)
 
@@ -43,6 +38,7 @@ describe GameFlow do
       end
 
       context 'and the player guess a letter with success' do
+        before { allow(game).to receive(:guess_letter).and_return(true) }
         it 'print a guessed letter' do
           # Um jeito de fazer stub:
           # allow(game).to receive(:guess_letter).and_return(true)
@@ -57,7 +53,7 @@ describe GameFlow do
         end
 
         it 'print success message' do
-          message = 'Você adivinhou uma letra.'
+          message = 'Você adivinhou uma letra com sucesso.'
           expect(ui).to receive(:write).with(message)
 
           game_flow.next_step
@@ -102,8 +98,13 @@ describe GameFlow do
     it 'finish game when player tyoe ~end~'do
       input_text = 'fim'
       allow(ui).to receive(:read).and_return(input_text)
-      allow(game).to receive(:finish)
 
+      allow(game).to receive(:state).and_return(:initial)
+      expect(game).to receive(:finish)
+      game_flow.next_step
+
+      allow(game).to receive(:state).and_return(:word_raffled)
+      expect(game).to receive(:finish)
       game_flow.next_step
     end
   end

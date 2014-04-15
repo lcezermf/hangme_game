@@ -2,7 +2,8 @@ require_relative 'command_line_ui'
 require_relative 'word_raffler'
 
 class Game
-  attr_accessor :raffled_word, :state, :guessed_letters
+  attr_accessor :raffled_word, :state
+  attr_reader :guessed_letters
 
   def initialize(word_raffler = WordRaffler.new)
     @word_raffler = word_raffler
