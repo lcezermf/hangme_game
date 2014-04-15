@@ -59,6 +59,26 @@ describe GameFlow do
           game_flow.next_step
         end
       end
+
+      context 'and the player fails to guess letter' do
+        before { allow(game).to receive(:guess_letter).and_return(false) }
+
+        it 'print error message' do
+          message = 'Você errou a letra.'
+          expect(ui).to receive(:write).with(message)
+
+          game_flow.next_step
+        end
+
+        it 'print the list of missed parts' do
+          allow(game).to receive(:missed_parts).and_return(['cabeça'])
+          message = 'O boneco da forca perdeu as seguintes partes do corpo: cabeça'
+          expect(ui).to receive(:write).with(message)
+
+          game_flow.next_step
+        end
+
+      end
     end
 
 
