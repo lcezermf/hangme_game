@@ -42,7 +42,7 @@ Funcionalidade: Adivinhar Letra
 
     Dado que comecei um jogo
     E que escolhi que a palavra a ser sorteada deverá ter "6" letras
-    Quando tento adivinhar que a palavra tem a letra "a"
+    Quando tento adivinhar que a palavra tem a letra "x"
     E termino o jogo
     Então o jogo mostra que eu errei na adivinhação da letra
     E o jogo termina com a seguinte mensagem na tela:

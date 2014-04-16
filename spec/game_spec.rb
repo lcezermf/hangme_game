@@ -112,6 +112,14 @@ describe Game do
 
       expect(game.missed_parts).to eq(['cabeça', 'corpo', 'braço esquerdo'])
     end
+
+    it 'update missed_parts' do
+      game.raffled_word = 'megadeth'
+
+      game.guess_letter('x')
+
+      expect(game.missed_parts).to eq(['cabeça'])
+    end
   end
 
 end

@@ -4,12 +4,17 @@ require_relative 'word_raffler'
 class Game
   attr_accessor :raffled_word, :state
   attr_reader :guessed_letters, :missed_parts
+  HANGME_PARTS = [
+    'cabeça', 'corpo', 'braço esquerdo',
+    'braço direito', 'perna esquerda', 'perna direita'
+  ]
 
   def initialize(word_raffler = WordRaffler.new)
     @word_raffler = word_raffler
     @state = :initial
     @guessed_letters = []
     @missed_parts = []
+    @wrong_guesses = 0
   end
 
   def raffle(word_size)
@@ -33,6 +38,8 @@ class Game
       @guessed_letters.uniq!
       return true
     else
+      @missed_parts << HANGME_PARTS[@wrong_guesses]
+      @wrong_guesses += 1
       return false
     end
   end

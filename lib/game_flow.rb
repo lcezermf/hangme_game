@@ -31,8 +31,8 @@ class GameFlow
         @ui.write('Você adivinhou uma letra com sucesso.')
         @ui.write(guessed_letters)
       else
-        @ui.write("Você errou a letra.")
-        missed_parts
+        @ui.write "Você errou a letra."
+        @ui.write missed_parts
       end
     end
   end
@@ -82,7 +82,6 @@ class GameFlow
   def missed_parts
     message = 'O boneco da forca perdeu as seguintes partes do corpo: '
     message << @game.missed_parts.join(', ')
-    @ui.write message
   end
 
 end
