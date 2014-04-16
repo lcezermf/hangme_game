@@ -34,7 +34,6 @@ Funcionalidade: Adivinhar Letra
       _ _ a _ _ _
       """
 
-  @wip
   Cenário: Erro ao adivinhar letra
     Se o jogador errar ao tentar adivinhar a letra, o jogo mostra uma
     mensagem de erro e mostra quais as partes o boneco da forca já
@@ -50,9 +49,21 @@ Funcionalidade: Adivinhar Letra
     O boneco da forca perdeu as seguintes partes do corpo: cabeça
     """
 
+  @wip
   Cenário: Jogador advinha com sucesso duas vezes
     Quanto mais o jogador for acertando, mais o jogo vai mostrando pra
     ele as letras que ele adivinhou.
+
+    Dado que comecei um jogo
+    E que escolhi que a palavra a ser sorteada deverá ter "6" letras
+    Quando tento adivinhar que a palavra tem a letra "s"
+    E tento adivinhar que a palavra tem a letra "l"
+    E termino o jogo
+    Então o jogo termina com a seguinte mensagem na tela:
+    """
+    s l _ _ _ _
+    """
+
 
   Cenário: Jogador erra três vezes ao adivinhar letra
     Quanto mais o jogador for errando, mais partes do boneco da forca
