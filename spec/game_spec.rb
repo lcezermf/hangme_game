@@ -65,6 +65,15 @@ describe Game do
       }.to change { game.guessed_letters }.from([]).to(['a'])
     end
 
+    it 'from :word_raffled to :ended when the play make 6 errors' do
+      game.state = :word_raffled
+      game.raffled_word = 'slayer'
+
+      expect do
+        6.times { game.guess_letter('z') }
+      end.to change { game.state }.from(:word_raffled).to(:ended)
+    end
+
     it 'does not save guessed_letters more than once' do
       game.raffled_word = 'slayer'
       game.guess_letter('a')

@@ -30,6 +30,15 @@ Funcionalidade: Fim do jogo
     Você venceu! :)
     """
 
+  @wip
   Cenário: Jogador perde o jogo
     Para que o jogador perca o jogo, basta que ele erre 6 vezes ao
     tentar adivinhar uma letra.
+
+    Dado que comecei um jogo
+      E que escolhi que a palavra a ser sorteada deverá ter "6" letras
+      Quando tento adivinhar que a palavra tem a letra "z" "6" vezes
+      Então o jogo termina com a seguinte mensagem na tela:
+      """
+      Você perdeu! :(
+      """

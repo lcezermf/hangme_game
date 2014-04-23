@@ -47,6 +47,7 @@ class Game
     else
       @missed_parts << HANGME_PARTS[@wrong_guesses]
       @wrong_guesses += 1
+      @state = :ended if @wrong_guesses == 6
       return false
     end
   end
