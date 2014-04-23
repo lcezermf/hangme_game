@@ -12,6 +12,48 @@ describe Game do
     end
   end
 
+  context '#player_won?' do
+    before do
+      game.state = :word_raffled
+      game.raffled_word = 'slayer'
+    end
+
+
+    it 'return true if player guess all letters' do
+      game.guess_letter('s')
+      game.guess_letter('l')
+      game.guess_letter('a')
+      game.guess_letter('y')
+      game.guess_letter('e')
+      game.guess_letter('r')
+      expect(game.player_won?).to be_true
+    end
+
+    it 'from :word_raffled to :ended' do
+      expect do
+        game.guess_letter('s')
+        game.guess_letter('l')
+        game.guess_letter('a')
+        game.guess_letter('y')
+        game.guess_letter('e')
+        game.guess_letter('r')
+      end.to change { game.state }.from(:word_raffled).to(:ended)
+    end
+
+    it 'return false when make 6 errors' do
+      6.times { game.guess_letter('w') }
+      expect(game.player_won?).to be_false
+    end
+
+    it "returns false when the game is not in the 'ended' state" do
+      game.state = :initial
+      expect(game.player_won?).to be_false
+
+      game.state = :word_raffled
+      expect(game.player_won?).to be_false
+    end
+  end
+
   context '#guess_letter' do
     it { expect(game.guessed_letters).to eq([]) }
 

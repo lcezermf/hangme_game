@@ -16,6 +16,20 @@ describe GameFlow do
   end
 
   context '#next_step' do
+    context 'when the game is in the ended state' do
+      before { allow(game).to receive(:state).and_return(:ended) }
+
+      it 'prints a success message when player win' do
+        allow(game).to receive(:player_won?).and_return(true)
+
+        message = 'Você venceu! :)'
+        expect(ui).to receive(:write).with(message)
+
+        game_flow.next_step
+      end
+
+    end
+
     context 'when the game just started' do
       it 'ask to player, how many letters for your word' do
         question = 'Qual o tamanho da palavra a ser sorteada?'

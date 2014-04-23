@@ -63,7 +63,6 @@ Funcionalidade: Adivinhar Letra
     s l _ _ _ _
     """
 
-  @wip
   Cenário: Jogador erra três vezes ao adivinhar letra
     Quanto mais o jogador for errando, mais partes do boneco da forca
     são perdidas.

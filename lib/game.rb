@@ -23,6 +23,12 @@ class Game
     end
   end
 
+  def player_won?
+    return false unless @state == :ended
+
+    all_letters_were_guessed?
+  end
+
   def ended?
     @state.eql? :ended
   end
@@ -36,12 +42,20 @@ class Game
     if @raffled_word.include? letter
       @guessed_letters << letter
       @guessed_letters.uniq!
+      @state = :ended if all_letters_were_guessed?
       return true
     else
       @missed_parts << HANGME_PARTS[@wrong_guesses]
       @wrong_guesses += 1
       return false
     end
+  end
+
+  private
+
+  def all_letters_were_guessed?
+    raffled_word_letters = @raffled_word.to_s.chars.to_a.uniq.sort
+    @guessed_letters.sort == raffled_word_letters
   end
 
 end
